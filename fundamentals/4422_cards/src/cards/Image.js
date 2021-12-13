@@ -10,4 +10,3 @@ const Image = (prop) => {
 };
 
 export default Image;
-// {faker.image.animals()}

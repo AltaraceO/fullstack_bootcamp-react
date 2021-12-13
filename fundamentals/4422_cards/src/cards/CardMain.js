@@ -3,7 +3,6 @@ import Caption from "./Caption";
 import Image from "./Image";
 import Links from "./Links";
 import Title from "./Title";
-// import Caption from "./Caption";
 
 const CardMain = (prop) => {
   return (
