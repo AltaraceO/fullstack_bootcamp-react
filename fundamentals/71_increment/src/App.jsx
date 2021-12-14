@@ -16,8 +16,9 @@ class App extends React.Component {
     console.log("add");
     let stateCount = this.state.counter;
     if (stateCount < 10) {
-      stateCount = stateCount + 2;
+      stateCount = stateCount + 1;
       this.setState({ counter: stateCount });
+
       console.log(this.state.counter);
     }
   }
@@ -26,17 +27,30 @@ class App extends React.Component {
 
     let stateCount = this.state.counter;
     if (stateCount > -10) {
-      stateCount = stateCount - 2;
+      stateCount = stateCount - 1;
       this.setState({ counter: stateCount });
+
       console.log(this.state.counter);
     }
   }
+
+  colorChange = () => {
+    if (this.state.counter > 0) {
+      return "green";
+    } else if (this.state.counter < 0) {
+      return "red";
+    } else {
+      return "black";
+    }
+  };
 
   render() {
     return (
       <div>
         <button onClick={this.subtract}>-</button>
-        <div className="counter">{this.state.counter}</div>
+        <div style={{ color: this.colorChange() }} className="counter">
+          {this.state.counter}
+        </div>
         <button onClick={this.add}>+</button>
       </div>
     );
