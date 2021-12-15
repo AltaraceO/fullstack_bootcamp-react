@@ -1,0 +1,23 @@
+.first {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.first::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-top: solid 10px turquoise;
+  border-right: transparent 10px solid;
+  border-radius: 50%;
+  animation: spinAround 3s forwards infinite linear;
+}
+
+@keyframes spinAround {
+  to {
+    transform: rotate(360deg);
+  }
+}
