@@ -1,0 +1,28 @@
+body {
+  margin: 20px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  color: lightslategrey;
+  width: 100px;
+  border: lightslategrey solid 1px;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+img {
+  padding-top: 10px;
+}
+
+.input {
+  padding: 20px;
+}

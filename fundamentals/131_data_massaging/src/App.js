@@ -34,9 +34,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* {this.getData()} */}
+        {this.getData()}
         <div>
-          {/* <Name names={this.state.pre90s} /> */}
+          <Name names={this.state.pre90s} />
           <Card names={this.state.pre90s} />
         </div>
       </div>
