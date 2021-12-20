@@ -22,12 +22,15 @@ class Main extends React.Component {
     this.setState({ person: newArr });
   }
 
-  filter = () => {};
+  filter = (e) => {
+    value.target.value;
+    this.setState({ value: val });
+  };
   render() {
     console.log(this.state.person);
     return (
       <div>
-        <Input />
+        <Input func={this.filter} />
         <div>{this.state.person && <Avatar people={this.state.person} />}</div>
       </div>
     );
