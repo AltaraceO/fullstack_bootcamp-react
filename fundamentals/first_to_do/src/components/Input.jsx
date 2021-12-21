@@ -4,19 +4,24 @@ class AddItem extends Component {
   state = { value: "" };
 
   handleOnChange = (e) => {
-    // console.log(e.target.value);
     this.setState({ value: e.target.value });
   };
 
   onClickHandle = () => {
-    this.props.func(this.state.value);
-    this.setState({ value: "" });
+    if (this.state.value.length) {
+      this.props.func(this.state.value);
+      this.setState({ value: "" });
+    }
   };
   render() {
     return (
       <div>
-        <input onChange={this.handleOnChange} type="text" />
-        <button onClick={this.onClickHandle}>Add item</button>
+        <input
+          onChange={this.handleOnChange}
+          type="text"
+          value={this.state.value}
+        />
+        <button onClick={this.onClickHandle}>Add item to do</button>
       </div>
     );
   }
