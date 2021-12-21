@@ -13,6 +13,12 @@ class Product extends React.Component {
     this.setState({ currItem: findItem });
   }
 
+  handleClick = () => {
+    console.log(this.props.history);
+    this.props.history.push("/home");
+    // this.props.history.goBack();
+  };
+
   render() {
     return (
       <div>
@@ -27,6 +33,8 @@ class Product extends React.Component {
               src={this.state.currItem.imageUrl}
               alt="img"
             />
+            <br />
+            <button onClick={this.handleClick}>Back</button>
           </div>
         )}
       </div>
