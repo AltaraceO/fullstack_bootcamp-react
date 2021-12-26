@@ -5,6 +5,7 @@ class Product extends React.Component {
   state = { items: "", currItem: "" };
 
   componentDidMount() {
+    console.log("hello");
     const itemId = Number(this.props.match.params.id);
 
     const findItem = store.find((item) => {
@@ -20,6 +21,7 @@ class Product extends React.Component {
   };
 
   render() {
+    console.log("hello");
     return (
       <div>
         {this.state.currItem && (
