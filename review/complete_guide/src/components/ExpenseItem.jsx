@@ -1,15 +1,22 @@
 import React from "react";
 import "./ExpenseItem.css";
 
-export const ExpenseItem = () => {
+export const ExpenseItem = ({ date, amount, title }) => {
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const day = date.toLocaleString("en-US", { day: "2-digit" });
+  const year = date.getFullYear();
   return (
     <div className="expense-item">
-      <div>Date</div>
-      <div className="expense-item__description">
-        <h2>carInsurance</h2>
-        <div className="expense-item__price">$256.54</div>
+      <div>
+        <div>{month}</div>
+        <div>{day}</div>
+        <div>{year}</div>
       </div>
-      ExpenseItem
+
+      <div className="expense-item__description">
+        <h2>{title}</h2>
+        <div className="expense-item__price">${amount}</div>
+      </div>
     </div>
   );
 };
