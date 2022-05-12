@@ -1,34 +1,46 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
 
-export const ExpenseForm = () => {
+export const ExpenseForm = ({ onSaveExpenseData }) => {
   //   const [title, setTitle] = useState(null);
   //   const [amount, setAmount] = useState(null);
   //   const [date, setDate] = useState(null);
   const [userInput, setUserInput] = useState({
-    title: null,
-    amout: null,
-    date: null,
+    title: "",
+    amount: "",
+    date: "",
   });
 
-  const handleUserInput = (e, name) => {
-    setUserInput({
-      ...userInput,
-      name: e.target.value,
+  const changeHandlerTitle = (e) => {
+    setUserInput((prevState) => {
+      return { ...prevState, title: e.target.value };
+    });
+  };
+  const changeHandlerAmount = (e) => {
+    setUserInput((prevState) => {
+      return { ...prevState, amount: e.target.value };
+    });
+  };
+  const changeHandlerDate = (e) => {
+    setUserInput((prevState) => {
+      return { ...prevState, date: e.target.value };
     });
   };
 
-  const changeHandlerTitle = (e) => {
-    // setTitle(e.target.value);
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    const expenseData = {
+      ...userInput,
+      date: new Date(userInput.date),
+    };
+
+    onSaveExpenseData(expenseData);
+    setUserInput({ title: "", amount: "", date: "" });
   };
-  const changeHandlerAmount = (e) => {
-    // setAmount(e.target.value);
-  };
-  const changeHandlerDate = (e) => {
-    console.log(e);
-  };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
