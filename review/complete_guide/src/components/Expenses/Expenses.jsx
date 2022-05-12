@@ -10,12 +10,17 @@ export const Expenses = ({ expenses }) => {
   const getFilteredYear = (year) => {
     setFilteredYear(year);
   };
+
+  const filteredArr = expenses.filter(
+    (el) => el.date.getFullYear().toString() === filteredYear
+  );
+
   return (
     <div>
       {console.log("filtered Year", filteredYear)}
       <Card className="expenses">
         <ExpenseFilter selected={filteredYear} onFilterYear={getFilteredYear} />
-        {expenses.map((el) => {
+        {filteredArr.map((el) => {
           return (
             <ExpenseItem
               title={el.title}
