@@ -20,16 +20,20 @@ export const Expenses = ({ expenses }) => {
       {console.log("filtered Year", filteredYear)}
       <Card className="expenses">
         <ExpenseFilter selected={filteredYear} onFilterYear={getFilteredYear} />
-        {filteredArr.map((el) => {
-          return (
-            <ExpenseItem
-              title={el.title}
-              date={el.date}
-              amount={el.amount}
-              key={el.id}
-            />
-          );
-        })}
+        {!filteredArr.length ? (
+          <p>No Expenses Found</p>
+        ) : (
+          filteredArr.map((el) => {
+            return (
+              <ExpenseItem
+                title={el.title}
+                date={el.date}
+                amount={el.amount}
+                key={el.id}
+              />
+            );
+          })
+        )}
       </Card>
     </div>
   );
