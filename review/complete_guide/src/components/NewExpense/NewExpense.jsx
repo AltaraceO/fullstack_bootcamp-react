@@ -1,7 +1,10 @@
 import "./NewExpense.css";
 import { ExpenseForm } from "./ExpenseForm";
+import { useState } from "react";
 
 export const NewExpense = ({ onAddExpense }) => {
+  const [toggle, setToggle] = useState(false);
+
   const saveExpenseDataHandler = (enteredExpenseData) => {
     console.log(enteredExpenseData);
     const expenseData = {
@@ -10,9 +13,20 @@ export const NewExpense = ({ onAddExpense }) => {
     };
     onAddExpense(expenseData);
   };
+
+  const startEditing = () => {
+    // setToggle(true);
+    toggle ? setToggle(false) : setToggle(true);
+  };
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+      {!toggle && <button onClick={startEditing}>Add New Expense</button>}
+      {toggle && (
+        <ExpenseForm
+          onStopEdit={startEditing}
+          onSaveExpenseData={saveExpenseDataHandler}
+        />
+      )}
     </div>
   );
 };
