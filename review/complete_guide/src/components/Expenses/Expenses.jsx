@@ -20,9 +20,8 @@ export const Expenses = ({ expenses }) => {
       {console.log("filtered Year", filteredYear)}
       <Card className="expenses">
         <ExpenseFilter selected={filteredYear} onFilterYear={getFilteredYear} />
-        {!filteredArr.length ? (
-          <p>No Expenses Found</p>
-        ) : (
+        {!filteredArr.length && <p>No Expenses Found</p>}
+        {filteredArr.length > 0 &&
           filteredArr.map((el) => {
             return (
               <ExpenseItem
@@ -32,8 +31,7 @@ export const Expenses = ({ expenses }) => {
                 key={el.id}
               />
             );
-          })
-        )}
+          })}
       </Card>
     </div>
   );
