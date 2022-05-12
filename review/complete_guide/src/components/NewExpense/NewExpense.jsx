@@ -15,7 +15,6 @@ export const NewExpense = ({ onAddExpense }) => {
   };
 
   const startEditing = () => {
-    // setToggle(true);
     toggle ? setToggle(false) : setToggle(true);
   };
   return (

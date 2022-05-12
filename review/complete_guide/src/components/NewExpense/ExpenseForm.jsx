@@ -37,6 +37,7 @@ export const ExpenseForm = ({ onStopEdit, onSaveExpenseData }) => {
 
     onSaveExpenseData(expenseData);
     setUserInput({ title: "", amount: "", date: "" });
+    onStopEdit();
   };
 
   return (
@@ -72,7 +73,7 @@ export const ExpenseForm = ({ onStopEdit, onSaveExpenseData }) => {
         </div>
       </div>
       <div className="new-expense__actions">
-        <button type="button" onClick={() => onStopEdit()}>
+        <button type="button" onClick={onStopEdit}>
           Cancel
         </button>
         <button type="submit">Add Expense</button>
