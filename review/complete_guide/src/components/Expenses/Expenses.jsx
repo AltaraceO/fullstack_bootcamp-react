@@ -21,7 +21,7 @@ export const Expenses = ({ expenses }) => {
       {console.log("filtered Year", filteredYear)}
       <Card className="expenses">
         <ExpenseFilter selected={filteredYear} onFilterYear={getFilteredYear} />
-        <ExpensesChart />
+        <ExpensesChart expenses={filteredArr} />
         <ExpensesList items={filteredArr} />
       </Card>
     </div>
