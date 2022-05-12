@@ -15,23 +15,27 @@ export const Expenses = ({ expenses }) => {
     (el) => el.date.getFullYear().toString() === filteredYear
   );
 
+  let expensesContent = <p>No Expenses Found</p>;
+
+  if (filteredArr.length > 0) {
+    expensesContent = filteredArr.map((el) => {
+      return (
+        <ExpenseItem
+          title={el.title}
+          date={el.date}
+          amount={el.amount}
+          key={el.id}
+        />
+      );
+    });
+  }
+
   return (
     <div>
       {console.log("filtered Year", filteredYear)}
       <Card className="expenses">
         <ExpenseFilter selected={filteredYear} onFilterYear={getFilteredYear} />
-        {!filteredArr.length && <p>No Expenses Found</p>}
-        {filteredArr.length > 0 &&
-          filteredArr.map((el) => {
-            return (
-              <ExpenseItem
-                title={el.title}
-                date={el.date}
-                amount={el.amount}
-                key={el.id}
-              />
-            );
-          })}
+        {expensesContent}
       </Card>
     </div>
   );

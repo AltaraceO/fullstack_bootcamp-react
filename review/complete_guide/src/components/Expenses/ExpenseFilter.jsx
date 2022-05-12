@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./ExpenseFilter.css";
 
 export const ExpenseFilter = ({ onFilterYear, selected }) => {
