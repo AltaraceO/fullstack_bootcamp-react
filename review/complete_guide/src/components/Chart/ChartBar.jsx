@@ -9,9 +9,12 @@ export const ChartBar = ({ label, value, maxValue }) => {
   return (
     <div className="chart-bar">
       <div className="chart-bar__inner">
-        <div className="char-bar__fill" style={{ height: barFillHeight }}></div>
+        <div
+          className="chart-bar__fill"
+          style={{ height: barFillHeight }}
+        ></div>
       </div>
-      <div className="chart-bar__label">{label} </div>
+      <div className="chart-bar__label">{label}</div>
     </div>
   );
 };
