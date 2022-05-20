@@ -3,22 +3,26 @@ import { Button } from "../UI/Button";
 import classes from "./AddUser.module.css";
 import { useState } from "react";
 
-export const AddUser = () => {
+export const AddUser = ({ onAddUser }) => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
 
   const addUserHandler = (e) => {
     e.preventDefault();
+    console.log("here", e.target.name);
 
     if (name.trim().length === 0 || age.trim().length === 0) {
       return;
     }
+
+    onAddUser(name, age);
 
     setAge("");
     setName("");
   };
 
   const userNameChangeHandler = (e) => {
+    console.log(e.target.value);
     setName(e.target.value);
   };
   const ageChangeHandler = (e) => {

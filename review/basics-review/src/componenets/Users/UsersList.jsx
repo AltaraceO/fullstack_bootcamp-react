@@ -7,8 +7,8 @@ export const UsersList = ({ users }) => {
       <ul>
         {users.map((e) => {
           return (
-            <li>
-              {e.name}({e.age} years old)
+            <li key={e.id}>
+              {e.name} ({e.age} years old)
             </li>
           );
         })}
