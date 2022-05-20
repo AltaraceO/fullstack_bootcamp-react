@@ -1,18 +1,20 @@
 import { Card } from "../UI/Card";
 import { Button } from "../UI/Button";
 import classes from "./AddUser.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ErrorModal } from "../UI/ErrorModal";
 
 export const AddUser = ({ onAddUser }) => {
+  const nameRef = useRef();
+  const ageRef = useRef();
+
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
-
   const [error, setError] = useState();
 
   const addUserHandler = (e) => {
     e.preventDefault();
-    console.log("here", e.target.name);
+    console.log("refs", nameRef, ageRef);
 
     if (name.trim().length === 0 || age.trim().length === 0) {
       setError({
@@ -60,6 +62,7 @@ export const AddUser = ({ onAddUser }) => {
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
           <input
+            ref={nameRef}
             onChange={userNameChangeHandler}
             id="username"
             type="text"
@@ -67,6 +70,7 @@ export const AddUser = ({ onAddUser }) => {
           />
           <label htmlFor="age">Age(Years)</label>
           <input
+            ref={ageRef}
             onChange={ageChangeHandler}
             id="age"
             type="number"
