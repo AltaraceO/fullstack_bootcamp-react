@@ -39,17 +39,20 @@ const Login = (props) => {
     isValid: null,
   });
 
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: pwIsValid } = pwState;
+
   useEffect(() => {
     const returnsIdentifier = setTimeout(() => {
       console.log("will only run after 500ms of time between key strokes");
-      setFormIsValid(emailState.isValid && pwState.isValid);
+      setFormIsValid(emailIsValid && pwIsValid);
     }, 500);
 
     return () => {
       console.log("will run on each key stroke");
       clearTimeout(returnsIdentifier);
     };
-  }, [pwState, emailState]);
+  }, [pwIsValid, emailIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
