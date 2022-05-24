@@ -7,8 +7,10 @@ import CartContext from "./../../store/cart-context";
 export const HeaderCartButton = ({ onClick }) => {
   const cartCtx = useContext(CartContext);
 
-  const numberOfCartItems = cartCtx.items.reduce((acc, curr) => {
-    return curr + curr.amount;
+  const { items } = cartCtx;
+
+  const numberOfCartItems = items.reduce((curNumber, item) => {
+    return curNumber + item.amount;
   }, 0);
 
   return (
