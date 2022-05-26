@@ -12,7 +12,7 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://swapi.dev/api/film/");
+      const res = await fetch("http://swapi.dev/api/films/");
 
       if (!res.ok) {
         throw new Error("something went wrong!");
@@ -42,7 +42,7 @@ function App() {
       </section>
       <section>
         {!loading ? <MoviesList movies={movies} /> : <p>Loading...</p>}
-        {!loading && movies.length === 0 && <p>No Data Yet</p>}
+        {!loading && movies.length === 0 && !error && <p>No Data Yet</p>}
         {error && <p>{error}</p>}
       </section>
     </React.Fragment>
