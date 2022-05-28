@@ -4,13 +4,29 @@ const SimpleInput = (props) => {
   const nameInputRef = useRef();
   const [name, setName] = useState("");
   const [nameIsValid, setNameIsValid] = useState(true);
+  const [nameTouched, setNameTouched] = useState(false);
+
+  const nameIsInvalid = !nameIsValid && nameTouched;
 
   const nameInputChangeHandler = (e) => {
     setName(e.target.value);
+
+    if (e.target.value.trim() !== "") {
+      setNameIsValid(true);
+    }
+  };
+
+  const nameBlueHandler = (e) => {
+    setNameTouched(true);
+    if (name.trim().length <= 0) {
+      setNameIsValid(false);
+    }
   };
 
   const formSubmissionHandler = (e) => {
     e.preventDefault();
+
+    setNameTouched(true);
 
     if (name.trim().length <= 0) {
       setNameIsValid(false);
@@ -20,9 +36,9 @@ const SimpleInput = (props) => {
     console.log(name, nameInputRef.current.value);
   };
 
-  const nameInputClasses = nameIsValid
-    ? "form-control"
-    : "form-control invalid";
+  const nameInputClasses = nameIsInvalid
+    ? "form-control invalid"
+    : "form-control";
   return (
     <form onSubmit={formSubmissionHandler}>
       <div className={nameInputClasses}>
@@ -32,10 +48,11 @@ const SimpleInput = (props) => {
           type="text"
           id="name"
           value={name}
+          onBlur={nameBlueHandler}
           onChange={nameInputChangeHandler}
         />
       </div>
-      {!nameIsValid && <p className="error-text">Name's too short</p>}
+      {nameIsInvalid && <p className="error-text">Name's too short</p>}
       <div className="form-actions">
         <button>Submit</button>
       </div>
