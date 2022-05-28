@@ -3,24 +3,17 @@ import { useState, useRef } from "react";
 const SimpleInput = (props) => {
   const nameInputRef = useRef();
   const [name, setName] = useState("");
-  const [nameIsValid, setNameIsValid] = useState(true);
   const [nameTouched, setNameTouched] = useState(false);
 
+  const nameIsValid = name.trim() !== "";
   const nameIsInvalid = !nameIsValid && nameTouched;
 
   const nameInputChangeHandler = (e) => {
     setName(e.target.value);
-
-    if (e.target.value.trim() !== "") {
-      setNameIsValid(true);
-    }
   };
 
   const nameBlueHandler = (e) => {
     setNameTouched(true);
-    if (name.trim().length <= 0) {
-      setNameIsValid(false);
-    }
   };
 
   const formSubmissionHandler = (e) => {
@@ -28,12 +21,13 @@ const SimpleInput = (props) => {
 
     setNameTouched(true);
 
-    if (name.trim().length <= 0) {
-      setNameIsValid(false);
+    if (!nameIsValid) {
       return;
     }
-    setNameIsValid(true);
+
     console.log(name, nameInputRef.current.value);
+    setName("");
+    setNameTouched(false);
   };
 
   const nameInputClasses = nameIsInvalid
