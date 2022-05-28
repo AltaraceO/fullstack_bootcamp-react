@@ -1,38 +1,21 @@
 import React, { useEffect, useState } from "react";
-
+import useHttp from "./hooks/use-http";
 import Tasks from "./components/Tasks/Tasks";
 import NewTask from "./components/NewTask/NewTask";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [tasks, setTasks] = useState([]);
+  useHttp({
+    url: "https://react-review-68b13-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+  });
 
-  const fetchTasks = async (taskText) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(
-        "https://react-review-68b13-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
-      );
-
-      if (!response.ok) {
-        throw new Error("Request failed!");
-      }
-
-      const data = await response.json();
-
-      const loadedTasks = [];
-
-      for (const taskKey in data) {
-        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-      }
-
-      setTasks(loadedTasks);
-    } catch (err) {
-      setError(err.message || "Something went wrong!");
+  const transformTasks = (tasksObj) => {
+    const loadedTasks = [];
+    for (const taskKey in tasksObj) {
+      loadedTasks.push({ taskKey, text: tasksObj[taskKey].text });
     }
-    setIsLoading(false);
+
+    setTasks(loadedTasks);
   };
 
   useEffect(() => {
