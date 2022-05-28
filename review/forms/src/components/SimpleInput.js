@@ -3,22 +3,34 @@ import { useState, useRef } from "react";
 const SimpleInput = (props) => {
   const nameInputRef = useRef();
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [nameTouched, setNameTouched] = useState(false);
+  const [emailTouched, setEmailTouched] = useState(false);
 
   const nameIsValid = name.trim() !== "";
   const nameIsInvalid = !nameIsValid && nameTouched;
 
+  const emailIsValid = email.includes("@");
+  const emailIsInvalid = !emailIsValid && emailTouched;
+
   let formIsValid = false;
 
-  if (nameIsValid) {
+  if (nameIsValid && emailIsValid) {
     formIsValid = true;
   }
   const nameInputChangeHandler = (e) => {
     setName(e.target.value);
   };
 
+  const emailInputChangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
+
   const nameBlueHandler = (e) => {
     setNameTouched(true);
+  };
+  const emailBlueHandler = (e) => {
+    setEmailTouched(true);
   };
 
   const formSubmissionHandler = (e) => {
@@ -33,9 +45,14 @@ const SimpleInput = (props) => {
     console.log(name, nameInputRef.current.value);
     setName("");
     setNameTouched(false);
+    setEmail("");
+    setEmailTouched(false);
   };
 
   const nameInputClasses = nameIsInvalid
+    ? "form-control invalid"
+    : "form-control";
+  const emailInputClasses = emailIsInvalid
     ? "form-control invalid"
     : "form-control";
   return (
@@ -49,6 +66,17 @@ const SimpleInput = (props) => {
           value={name}
           onBlur={nameBlueHandler}
           onChange={nameInputChangeHandler}
+        />
+      </div>
+      <div className={emailInputClasses}>
+        <label htmlFor="email">Your eMail</label>
+        <input
+          ref={nameInputRef}
+          type="email"
+          id="email"
+          value={email}
+          onBlur={emailBlueHandler}
+          onChange={emailInputChangeHandler}
         />
       </div>
       {nameIsInvalid && <p className="error-text">Name's too short</p>}
