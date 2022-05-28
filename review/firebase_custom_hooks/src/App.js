@@ -5,9 +5,6 @@ import NewTask from "./components/NewTask/NewTask";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  useHttp({
-    url: "https://react-review-68b13-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
-  });
 
   const transformTasks = (tasksObj) => {
     const loadedTasks = [];
@@ -17,6 +14,13 @@ function App() {
 
     setTasks(loadedTasks);
   };
+
+  const httpData = useHttp({
+    url: "https://react-review-68b13-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+    transformTasks,
+  });
+
+  const { isLoading, error, sendRequest: fetchTasks } = httpData;
 
   useEffect(() => {
     fetchTasks();
