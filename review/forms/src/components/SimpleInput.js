@@ -1,12 +1,21 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const SimpleInput = (props) => {
   const nameInputRef = useRef();
   const [name, setName] = useState("");
   const [nameTouched, setNameTouched] = useState(false);
+  const [formIsValid, setFormIsValid] = useState(false);
 
   const nameIsValid = name.trim() !== "";
   const nameIsInvalid = !nameIsValid && nameTouched;
+
+  useEffect(() => {
+    if (nameIsValid) {
+      setFormIsValid(true);
+    } else {
+      setFormIsValid(false);
+    }
+  }, [nameIsValid]);
 
   const nameInputChangeHandler = (e) => {
     setName(e.target.value);
@@ -48,7 +57,7 @@ const SimpleInput = (props) => {
       </div>
       {nameIsInvalid && <p className="error-text">Name's too short</p>}
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
