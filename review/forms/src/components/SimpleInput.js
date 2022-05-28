@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 import useInput from "../hooks/use-input";
 
@@ -11,28 +11,22 @@ const SimpleInput = (props) => {
     inputBlurHandler: nameBlurHandler,
     reset: resetNameInput,
   } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: email,
+    valueIsValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmailInput,
+  } = useInput((value) => value.includes("@"));
   const nameInputRef = useRef();
-
-  const [email, setEmail] = useState("");
-
-  const [emailTouched, setEmailTouched] = useState(false);
-
-  const emailIsValid = email.includes("@");
-  const emailIsInvalid = !emailIsValid && emailTouched;
 
   let formIsValid = false;
 
   if (nameIsValid && emailIsValid) {
     formIsValid = true;
   }
-
-  const emailInputChangeHandler = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const emailBlueHandler = (e) => {
-    setEmailTouched(true);
-  };
 
   const formSubmissionHandler = (e) => {
     e.preventDefault();
@@ -43,14 +37,13 @@ const SimpleInput = (props) => {
 
     console.log(name, nameInputRef.current.value);
     resetNameInput();
-    setEmail("");
-    setEmailTouched(false);
+    resetEmailInput();
   };
 
   const nameInputClasses = nameHasError
     ? "form-control invalid"
     : "form-control";
-  const emailInputClasses = emailIsInvalid
+  const emailInputClasses = emailHasError
     ? "form-control invalid"
     : "form-control";
   return (
@@ -73,8 +66,8 @@ const SimpleInput = (props) => {
           type="email"
           id="email"
           value={email}
-          onBlur={emailBlueHandler}
-          onChange={emailInputChangeHandler}
+          onBlur={emailBlurHandler}
+          onChange={emailChangeHandler}
         />
       </div>
       {nameHasError && <p className="error-text">Name's too short</p>}
