@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 const SimpleInput = (props) => {
   const nameInputRef = useRef();
   const [name, setName] = useState("");
+  const [nameIsValid, setNameIsValid] = useState(true);
 
   const nameInputChangeHandler = (e) => {
     setName(e.target.value);
@@ -10,11 +11,21 @@ const SimpleInput = (props) => {
 
   const formSubmissionHandler = (e) => {
     e.preventDefault();
+
+    if (name.trim().length <= 0) {
+      setNameIsValid(false);
+      return;
+    }
+    setNameIsValid(true);
     console.log(name, nameInputRef.current.value);
   };
+
+  const nameInputClasses = nameIsValid
+    ? "form-control"
+    : "form-control invalid";
   return (
     <form onSubmit={formSubmissionHandler}>
-      <div className="form-control">
+      <div className={nameInputClasses}>
         <label htmlFor="name">Your Name</label>
         <input
           ref={nameInputRef}
@@ -24,6 +35,7 @@ const SimpleInput = (props) => {
           onChange={nameInputChangeHandler}
         />
       </div>
+      {!nameIsValid && <p className="error-text">Name's too short</p>}
       <div className="form-actions">
         <button>Submit</button>
       </div>
