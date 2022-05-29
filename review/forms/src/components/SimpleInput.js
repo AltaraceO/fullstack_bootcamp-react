@@ -59,6 +59,7 @@ const SimpleInput = (props) => {
           onChange={nameChangeHandler}
         />
       </div>
+      <hr />
       <div className={emailInputClasses}>
         <label htmlFor="email">Your eMail</label>
         <input
@@ -74,6 +75,7 @@ const SimpleInput = (props) => {
       <div className="form-actions">
         <button disabled={!formIsValid}>Submit</button>
       </div>
+      <hr />
     </form>
   );
 };
