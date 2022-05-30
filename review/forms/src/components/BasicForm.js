@@ -44,7 +44,7 @@ const BasicForm = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("submitted!");
+    console.log(firstName, lastName, emailValue);
     resetEmail();
     resetFirstName();
     resetLastName();
