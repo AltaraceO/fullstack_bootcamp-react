@@ -1,8 +1,8 @@
 import classes from "./Checkout.module.css";
 import { useRef, useState } from "react";
 
-const isEmpty = (value) => value.trim === "";
-const isLength = (value) => value.trim().length > 3;
+const isEmpty = (value) => value.trim() === "";
+const isLength = (value) => value.trim().length === 3;
 
 export const Checkout = ({ onCancel }) => {
   const [inputValidity, setInputValidity] = useState({
@@ -27,9 +27,10 @@ export const Checkout = ({ onCancel }) => {
 
     const validName = !isEmpty(enteredName);
     const validStreet = !isEmpty(enteredStreet);
-    const validPostal = !isLength(enteredPostal);
+    const validPostal = isLength(enteredPostal);
     const validCity = !isEmpty(enteredCity);
 
+    console.log("city", validCity);
     setInputValidity({
       name: validName,
       street: validStreet,
@@ -83,7 +84,9 @@ export const Checkout = ({ onCancel }) => {
         <button type="button" onClick={onCancel}>
           Cancel
         </button>
-        <button className={classes.submit}>Confirm</button>
+        <button onClick={confirmHandler} className={classes.submit}>
+          Confirm
+        </button>
       </div>
     </form>
   );
