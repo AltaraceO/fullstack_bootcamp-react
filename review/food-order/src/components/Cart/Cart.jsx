@@ -39,6 +39,7 @@ export const Cart = ({ onClose }) => {
     );
     setIsSubmitting(false);
     setDidSubmit(true);
+    cartCtx.clearCart();
   };
 
   const cartItems = (
