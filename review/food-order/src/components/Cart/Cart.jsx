@@ -24,6 +24,16 @@ export const Cart = ({ onClose }) => {
 
   const submitOrderHandler = (userData) => {
     console.log(userData);
+    fetch(
+      "https://react-review-68b13-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          user: userData,
+          items: cartCtx.items,
+        }),
+      }
+    );
   };
 
   const cartItems = (
