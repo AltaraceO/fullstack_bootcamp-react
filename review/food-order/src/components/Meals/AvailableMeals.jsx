@@ -34,12 +34,10 @@ export const AvailableMeals = () => {
       setLoading(false);
     };
 
-    try {
-      fetchMeals();
-    } catch (err) {
+    fetchMeals().catch((err) => {
       setLoading(false);
       setError(err.message);
-    }
+    });
   }, []);
 
   if (loading) {
