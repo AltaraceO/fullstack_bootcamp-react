@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 const isEmpty = (value) => value.trim() === "";
 const isLength = (value) => value.trim().length === 3;
 
-export const Checkout = ({ onCancel }) => {
+export const Checkout = ({ onCancel, onConfirm }) => {
   const [inputValidity, setInputValidity] = useState({
     name: true,
     street: true,
@@ -43,6 +43,13 @@ export const Checkout = ({ onCancel }) => {
     if (!formIsValid) {
       return;
     }
+
+    onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      postal: enteredPostal,
+      city: enteredCity,
+    });
   };
 
   const nameControlClasses = `${classes.control} ${

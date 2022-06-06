@@ -21,6 +21,11 @@ export const Cart = ({ onClose }) => {
   const orderHandler = () => {
     setShowForm(true);
   };
+
+  const submitOrderHandler = (userData) => {
+    console.log(userData);
+  };
+
   const cartItems = (
     <ul className={classes["cart-items"]}>
       {cartCtx.items.map((item) => (
@@ -56,7 +61,9 @@ export const Cart = ({ onClose }) => {
         <span>Total Amount </span>
         <span>{totalAmount}</span>
       </div>
-      {showForm && <Checkout onCancel={onClose} />}
+      {showForm && (
+        <Checkout onConfirm={submitOrderHandler} onCancel={onClose} />
+      )}
       {!showForm && modalActions}
     </Modal>
   );
