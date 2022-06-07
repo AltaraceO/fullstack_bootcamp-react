@@ -1,28 +1,8 @@
 // import { createStore } from "redux";
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
-const initialState = { counter: 0, showCounter: true };
-
-//*Behind the scenes TOOLKIT duplicates the state so it looks like its mutating the original state but it's NOT
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: initialState,
-  reducers: {
-    increment(state) {
-      state.counter++;
-    },
-    decrement(state) {
-      state.counter--;
-    },
-    //*dont have to use action , but it's there for payload
-    increase(state, action) {
-      state.counter = state.counter + action.payload;
-    },
-    toggleCounter(state) {
-      state.showCounter = !state.showCounter;
-    },
-  },
-});
+import counterReducer from "./counter";
+import authReducer from "./auth";
 
 //*action is an object
 // const counterReducers = (state = initialState, action) => {
@@ -58,8 +38,8 @@ const counterSlice = createSlice({
 // const store = createStore(counterReducers);
 
 //* replacement for createStore that helps combine reducers
-const store = configureStore({ reducer: counterSlice.reducer });
-
-export const counterActions = counterSlice.actions;
+const store = configureStore({
+  reducer: { counter: counterReducer, auth: authReducer },
+});
 
 export default store;

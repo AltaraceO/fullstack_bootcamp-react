@@ -1,14 +1,14 @@
 //* useSelector - A special HOOK that from react-redux
 //* useDispatch - HOOK
 import { useSelector, useDispatch } from "react-redux";
-import { counterActions } from "../store";
+import { counterActions } from "../store/counter";
 import classes from "./Counter.module.css";
 
 const Counter = () => {
   //*takes a function that determines which data to take out of store - only a slice...
   //*Any change in the store will re-run this component!
-  const counter = useSelector((state) => state.counter);
-  const show = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state.counter.counter);
+  const show = useSelector((state) => state.counter.showCounter);
   //* this creates a function that communicates with the store
   const dispatch = useDispatch();
 
